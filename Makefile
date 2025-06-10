@@ -1,3 +1,11 @@
+# ========================================================================
+# setup
+# ========================================================================
+#
+# Usage:
+#   make install-tools
+#   make proto-gen
+
 .PHONY: install-tools proto-gen
 
 # Install dependencies
@@ -18,3 +26,14 @@ proto-gen:
 		--go-grpc_opt=paths=source_relative \
 		proto/healthcheck/healthcheck.proto
 	@echo "Done!"
+
+
+# ========================================================================
+# grpc server request
+# ========================================================================
+#
+# Usage:
+#   make healthcheck
+#
+healthcheck:
+	grpcurl -plaintext -proto ./proto/healthcheck/healthcheck.proto localhost:50051 healthcheck.HealthCheckService/GetHeartbeat
