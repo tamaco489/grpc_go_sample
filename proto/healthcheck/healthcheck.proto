@@ -4,7 +4,7 @@ package healthcheck;
 
 option go_package = "grpc_go_sample/api/internal/gen/healthcheck;healthcheck";
 
-// 正常性チェック
+// Health check
 service HealthCheckService {
   rpc GetHeartbeat(GetHeartbeatRequest) returns (GetHeartbeatResponse) {}
 }

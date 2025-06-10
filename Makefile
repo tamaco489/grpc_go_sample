@@ -24,7 +24,8 @@ proto-gen:
 		--go_opt=paths=source_relative \
 		--go-grpc_out=./api/internal/gen \
 		--go-grpc_opt=paths=source_relative \
-		proto/healthcheck/healthcheck.proto
+		proto/healthcheck/healthcheck.proto \
+		proto/product/product.proto
 	@echo "Done!"
 
 
@@ -35,5 +36,10 @@ proto-gen:
 # Usage:
 #   make healthcheck
 #
+.PHONY: healthcheck get-products
+
 healthcheck:
 	grpcurl -plaintext localhost:50051 healthcheck.HealthCheckService/GetHeartbeat
+
+get-products:
+	grpcurl -plaintext localhost:50051 product.ProductService/GetProductList
