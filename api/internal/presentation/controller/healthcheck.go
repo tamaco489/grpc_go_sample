@@ -9,7 +9,6 @@ import (
 
 // HealthCheckController はgRPCのHealthCheckサービスの実装を担う構造体
 type HealthCheckController struct {
-	healthcheck.UnimplementedHealthCheckServiceServer
 	usecase usecase.UseCase
 }
 
