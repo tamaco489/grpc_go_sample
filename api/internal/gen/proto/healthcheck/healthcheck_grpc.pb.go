@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// 正常性チェック
+// Health check
 type HealthCheckServiceClient interface {
 	GetHeartbeat(ctx context.Context, in *GetHeartbeatRequest, opts ...grpc.CallOption) (*GetHeartbeatResponse, error)
 }
@@ -53,7 +53,7 @@ func (c *healthCheckServiceClient) GetHeartbeat(ctx context.Context, in *GetHear
 // All implementations must embed UnimplementedHealthCheckServiceServer
 // for forward compatibility.
 //
-// 正常性チェック
+// Health check
 type HealthCheckServiceServer interface {
 	GetHeartbeat(context.Context, *GetHeartbeatRequest) (*GetHeartbeatResponse, error)
 	mustEmbedUnimplementedHealthCheckServiceServer()
