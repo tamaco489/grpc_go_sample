@@ -6,19 +6,27 @@ import (
 	"google.golang.org/grpc/reflection"
 
 	healthcheck_pb "github.com/tamaco489/grpc_go_sample/api/internal/gen/proto/healthcheck"
+	product_pb "github.com/tamaco489/grpc_go_sample/api/internal/gen/proto/product"
+
 	healthcheck_usecase "github.com/tamaco489/grpc_go_sample/api/internal/usecase/healthcheck"
+	product_usecase "github.com/tamaco489/grpc_go_sample/api/internal/usecase/product"
 )
 
 // SetupControllers resolves dependencies from UseCase creation to Controller creation and returns them
 func SetupControllers() *controller.Controllers {
 	hcUsecase := healthcheck_usecase.NewUseCase()
-	return controller.NewControllers(hcUsecase)
+	productUsecase := product_usecase.NewUseCase()
+	return controller.NewControllers(
+		hcUsecase,
+		productUsecase,
+	)
 }
 
 // RegisterGRPCServices registers each service to the grpcServer
 func RegisterGRPCServices(grpcServer *grpc.Server, controllers *controller.Controllers) {
 	// HealthCheck service
 	healthcheck_pb.RegisterHealthCheckServiceServer(grpcServer, controllers.HealthCheck)
+	product_pb.RegisterProductServiceServer(grpcServer, controllers.Product)
 
 	// NOTE: Register other services here
 	// other.RegisterGRPCServer(grpcServer, controllers.Other)

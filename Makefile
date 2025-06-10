@@ -36,5 +36,10 @@ proto-gen:
 # Usage:
 #   make healthcheck
 #
+.PHONY: healthcheck get-products
+
 healthcheck:
 	grpcurl -plaintext localhost:50051 healthcheck.HealthCheckService/GetHeartbeat
+
+get-products:
+	grpcurl -plaintext localhost:50051 product.ProductService/GetProductList
