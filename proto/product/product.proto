@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package product;
+
+option go_package = "grpc_go_sample/api/internal/gen/proto/product;product";
+
+// Product management service
+service ProductService {
+  // Get a list of products
+  rpc GetProductList(GetProductListRequest) returns (GetProductListResponse) {}
+}
+
+// Represents a single product
+message Product {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  repeated string categories = 5;
+}
+
+// Request to get a list of products
+message GetProductListRequest {
+  // string category = 1;
+  // string keyword = 2;
+  // int32 page = 3;
+  // int32 page_size = 4;
+}
+
+// Response containing a list of products
+message GetProductListResponse {
+  repeated Product products = 1;
+}
