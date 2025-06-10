@@ -1,0 +1,19 @@
+.PHONY: install-tools proto-gen
+
+# Install dependencies
+install-tools:
+	@echo "Installing dependencies..."
+	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+	go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+	@echo "Done!"
+
+# Generate protobuf files
+proto-gen:
+	@echo "Generating protobuf files..."
+	protoc \
+		--go_out=./api/internal/gen \
+		--go_opt=paths=source_relative \
+		--go-grpc_out=./api/internal/gen \
+		--go-grpc_opt=paths=source_relative \
+		proto/healthcheck/healthcheck.proto
+	@echo "Done!"

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package healthcheck;
+
+option go_package = "grpc_go_sample/api/internal/gen/healthcheck;healthcheck";
+
+// 正常性チェック
+service HealthCheckService {
+  rpc GetHeartbeat(GetHeartbeatRequest) returns (GetHeartbeatResponse) {}
+}
+
+message GetHeartbeatRequest {}
+message GetHeartbeatResponse {
+  int64 server_time = 1;
+}
