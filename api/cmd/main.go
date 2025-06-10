@@ -10,16 +10,16 @@ import (
 const port = ":50051"
 
 func main() {
-	// TCPリスナーを作成
+	// Create a TCP listener
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	// gRPCサーバーを起動
+	// Start the gRPC server
 	s := adapter.NewGRPCServer()
 
-	// サーバーを起動
+	// Start the server
 	log.Printf("Server listening at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

@@ -2,12 +2,12 @@ package entity
 
 import "time"
 
-// HealthCheck はヘルスチェックのドメインエンティティを表します
+// HealthCheck represents the domain entity for health check
 type HealthCheck struct {
 	ServerTime time.Time
 }
 
-// NewHealthCheck は新しいHealthCheckエンティティを作成します
+// NewHealthCheck creates a new HealthCheck entity
 func NewHealthCheck() *HealthCheck {
 	return &HealthCheck{
 		ServerTime: time.Now(),

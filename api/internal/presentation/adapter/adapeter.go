@@ -8,22 +8,22 @@ import (
 	healthcheck_usecase "github.com/tamaco489/grpc_go_sample/api/internal/usecase/healthcheck"
 )
 
-// SetupControllers は UseCase生成～Controller生成までの依存関係を解決して返す
+// SetupControllers resolves dependencies from UseCase creation to Controller creation and returns them
 func SetupControllers() *controller.Controllers {
 	hcUsecase := healthcheck_usecase.NewUseCase()
 	return controller.NewControllers(hcUsecase)
 }
 
-// RegisterGRPCServices grpcServerへ各サービスを登録する
+// RegisterGRPCServices registers each service to the grpcServer
 func RegisterGRPCServices(grpcServer *grpc.Server, controllers *controller.Controllers) {
-	// HealthCheckサービス
+	// HealthCheck service
 	healthcheck_pb.RegisterHealthCheckServiceServer(grpcServer, controllers.HealthCheck)
 
 	// NOTE: Register other services here
 	// other.RegisterGRPCServer(grpcServer, controllers.Other)
 }
 
-// NewGRPCServer は gRPC サーバーを作成し、サービス登録済みの状態で返します。
+// NewGRPCServer creates a gRPC server with services registered
 func NewGRPCServer() *grpc.Server {
 	s := grpc.NewServer()
 	controllers := SetupControllers()
