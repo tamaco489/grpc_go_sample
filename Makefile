@@ -36,4 +36,4 @@ proto-gen:
 #   make healthcheck
 #
 healthcheck:
-	grpcurl -plaintext -proto ./proto/healthcheck/healthcheck.proto localhost:50051 healthcheck.HealthCheckService/GetHeartbeat
+	grpcurl -plaintext localhost:50051 healthcheck.HealthCheckService/GetHeartbeat

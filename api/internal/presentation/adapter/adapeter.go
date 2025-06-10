@@ -3,6 +3,7 @@ package adapter
 import (
 	"github.com/tamaco489/grpc_go_sample/api/internal/presentation/controller"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 
 	healthcheck_pb "github.com/tamaco489/grpc_go_sample/api/internal/gen/proto/healthcheck"
 	healthcheck_usecase "github.com/tamaco489/grpc_go_sample/api/internal/usecase/healthcheck"
@@ -28,5 +29,6 @@ func NewGRPCServer() *grpc.Server {
 	s := grpc.NewServer()
 	controllers := SetupControllers()
 	RegisterGRPCServices(s, controllers)
+	reflection.Register(s)
 	return s
 }
